@@ -57,7 +57,7 @@ class ConfigController extends Controller
 
     public function setTelegramWebhook(Request $request)
     {
-        $hookUrl = url('/api/v1/guest/telegram/webhook?access_token=' . md5(config('v2board.telegram_bot_token', $request->input('telegram_bot_token'))));
+        $hookUrl = secure_url('/api/v1/guest/telegram/webhook?access_token=' . md5(config('v2board.telegram_bot_token', $request->input('telegram_bot_token'))));
         $telegramService = new TelegramService($request->input('telegram_bot_token'));
         $telegramService->getMe();
         $telegramService->setWebhook($hookUrl);
@@ -198,7 +198,7 @@ class ConfigController extends Controller
             }
         }
         Artisan::call('config:cache');
-        if(Cache::has('WEBMANPID')) {
+        if (Cache::has('WEBMANPID')) {
             $pid = Cache::get('WEBMANPID');
             Cache::forget('WEBMANPID');
             return response([
