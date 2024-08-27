@@ -42,7 +42,7 @@ mysql/mariadb需自行安装
 ## 使用 Docker Compose 更新 v2board
 
     cd v2board
-    ./update.sh
+    docker compose run -it --rm v2board ./update.sh
     docker compose pull
     docker compose down
     docker compose run -it --rm v2board php artisan v2board:update
